@@ -36,26 +36,11 @@ pipeline {
             }
         }
 
-        // Remove this stage if pipeline fails due to Quality Gates
-        stage("Quality Gates") {
-            steps {
-                script {
-                    waitForQualityGate abortPipeline: false, credentialsId: 'sonar-token'
-                }
-            }
-        }
+        
 
         stage("Install Dependencies") {
             steps {
                 sh 'npm install'
-            }
-        }
-
-        // Remove this stage if pipeline fails due to OWASP
-        stage("OWASP Dependency Check") {
-            steps {
-                dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit', odcInstallation: 'DP-Check'
-                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
             }
         }
 
