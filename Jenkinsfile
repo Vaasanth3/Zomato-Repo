@@ -29,8 +29,9 @@ pipeline {
                 withSonarQubeEnv('mysonar') {
                     sh '''
                         $SCANNER_HOME/bin/sonar-scanner \
-                        -Dsonar.projectName=zomato \
-                        -Dsonar.projectKey=zomato
+                        -Dsonar.projectName=dockerwebapp \
+                        -Dsonar.projectKey=dockerwebapp
+                        -Dsonar.login=sqa_a75f326dd0236ad1ccee447e127ac840a101638a
                     '''
                 }
             }
